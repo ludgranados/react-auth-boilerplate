@@ -3,6 +3,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     isLoggedIn();
@@ -15,7 +16,9 @@ const Navbar = () => {
 
   const userLogout = () => {
     // log user out
+    localStorage.clear();
     // send user to login page
+    history.push('/auth/login');
   };
 
   return (

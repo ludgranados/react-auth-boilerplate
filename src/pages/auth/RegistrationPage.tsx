@@ -14,6 +14,7 @@ const RegistrationPage = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     userRegistration(formData);
+    alert("I see you've taken the red pill,Welcome to the matrix!!!");
   };
 
   return (
@@ -25,7 +26,7 @@ const RegistrationPage = () => {
       </div>
       <div className='row'>
         <div className='col-md-6 offset-md-3'>
-          <form action=''>
+          <form action='submit'>
             <div className='form-group my-3'>
               <input
                 type='text'
