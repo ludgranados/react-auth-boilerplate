@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   error: '',
   userLogin: () => {},
+  userRegistration: () => {},
 };
 
 const authReducer = (state: any, action: any) => {
@@ -18,6 +19,8 @@ const authReducer = (state: any, action: any) => {
       return { ...state, loading: action.payload };
     case 'ERROR':
       return { ...state, error: action.payload, loading: false };
+    case 'REGISTER':
+      return { ...state, users: action.payload };
     default:
       return state;
   }
@@ -41,6 +44,16 @@ export const AuthProvider: React.FC = ({ children }) => {
     }
   };
 
+  const userRegistration = async (user: User) => {
+    try {
+      let { data } = await instance.post('/auth/register', user);
+      dispatch({ type: 'REGISTER', payload: data });
+    } catch (e) {
+      console.log(e);
+      dispatch({ type: 'ERROR', payload: 'Registration has failed!' });
+    }
+  };
+
   // Function for userRegistration
 
   return (
@@ -50,6 +63,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         alert: state.alert,
         loading: state.loading,
         userLogin,
+        userRegistration,
       }}>
       {children}
     </AuthContext.Provider>
